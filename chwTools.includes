@@ -5,3 +5,15 @@ mel
 AETemplates
 src
 python
+python/chwtools
+module/scripts/AETemplates
+module/scripts/python/chwtools
+module/plug-ins
+module
+module/scripts
+chwTools/scripts/AETemplates
+chwTools
+chwTools/scripts/python/chwtools
+chwTools/scripts
+chwTools/scripts/chwtools
+chwTools/plug-ins

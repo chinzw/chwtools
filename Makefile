@@ -27,18 +27,20 @@ MAYA_LOCATION=/usr/autodesk/maya$(MAYA_MAJOR_VERSION)
 
 MAYA_INCLUDE=-I$(MAYA_LOCATION)/include
 MAYA_LIB=-L$(MAYA_LOCATION)/lib -lOpenMaya -lOpenMayaAnim
-MAYA_PLUGINS_PATH = $(MAYA_LOCATION)/bin/plug-ins
-MAYA_CUSTOM_TEMPLATE_PATH = $(MAYA_LOCATION)/scripts/AETemplates
 
 ##################################
 ## PLUGIN OUTPUT
 ##################################
+MAYA_MODULE_INSTALL_PATH = ~/maya/$(MAYA_MAJOR_VERSION)/modules
+MAYA_MODULE_PATH = chwTools
+MAYA_MODULE_FILE = $(MAYA_MODULE_PATH)/chwTools.mod
 LIBRARY=chwTools.so
 
 
 ##################################
 ## PLUGIN SOURCES
 ##################################
+PYTHON_MOLDULE=python
 AETEMPLATES=$(shell find AETemplates/ -name '*.mel')
 SOURCES=$(shell find src/ -name '*.cpp')
 HEADERS=${shell find include/ -name '*.h'}
@@ -77,12 +79,16 @@ $(LIBRARY): $(OBJECTS)
 	 $(CPP) $(OBJECTS) $(LFLAGS) $(LIB_FLAGS) -o $@
 
 install: $(LIBRARY)
-	cp -f $(LIBRARY) $(MAYA_PLUGINS_PATH)
-	cp -f $(AETEMPLATES) $(MAYA_CUSTOM_TEMPLATE_PATH)
+	mv -f $(LIBRARY) 'chwTools/plug-ins'
+	mkdir -p $(MAYA_MODULE_INSTALL_PATH)
+	cp -f $(MAYA_MODULE_FILE) $(MAYA_MODULE_INSTALL_PATH)
+	cp -r $(MAYA_MODULE_PATH) $(MAYA_MODULE_INSTALL_PATH)
 
 debug: $(LIBRARY)
-	cp -f $(LIBRARY) $(MAYA_PLUGINS_PATH)
-	cp -f $(AETEMPLATES) $(MAYA_CUSTOM_TEMPLATE_PATH)
+	mv -f $(LIBRARY) 'chwTools/plug-ins'
+	mkdir -p $(MAYA_MODULE_INSTALL_PATH)
+	cp -f $(MAYA_MODULE_FILE) $(MAYA_MODULE_INSTALL_PATH)
+	cp -r $(MAYA_MODULE_PATH) $(MAYA_MODULE_INSTALL_PATH)
 
 clean:
 	rm -f src/*.o
