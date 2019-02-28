@@ -1,0 +1,13 @@
+global proc AEchwCollisionTemplate( string $nodeName )
+{
+	editorTemplate -beginScrollLayout;
+	
+		editorTemplate -beginLayout "CHW Collision Deformer Attributes" -collapse 0;
+			editorTemplate -addControl "envelope";
+			AEaddRampControl( $nodeName + ".collisionBulgeRamp" );
+			editorTemplate -addControl "collisionMeshList";
+		editorTemplate -endLayout;
+	
+	editorTemplate -addExtraControls;
+	editorTemplate -endScrollLayout;
+}

@@ -27,7 +27,9 @@ MAYA_LOCATION=/usr/autodesk/maya$(MAYA_MAJOR_VERSION)
 
 MAYA_INCLUDE=-I$(MAYA_LOCATION)/include
 MAYA_LIB=-L$(MAYA_LOCATION)/lib -lOpenMaya -lOpenMayaAnim
-MAYA_PLUGINS_PATH = ~/maya/$(MAYA_MAJOR_VERSION)/plug-ins
+MAYA_PLUGINS_PATH = $(MAYA_LOCATION)/bin/plug-ins
+MAYA_CUSTOM_TEMPLATE_PATH = $(MAYA_LOCATION)/scripts/AETemplates
+
 ##################################
 ## PLUGIN OUTPUT
 ##################################
@@ -37,6 +39,7 @@ LIBRARY=chwTools.so
 ##################################
 ## PLUGIN SOURCES
 ##################################
+AETEMPLATES=$(shell find AETemplates/ -name '*.mel')
 SOURCES=$(shell find src/ -name '*.cpp')
 HEADERS=${shell find include/ -name '*.h'}
 OBJECTS=$(SOURCES:.cpp=.o)
@@ -75,9 +78,11 @@ $(LIBRARY): $(OBJECTS)
 
 install: $(LIBRARY)
 	cp -f $(LIBRARY) $(MAYA_PLUGINS_PATH)
+	cp -f $(AETEMPLATES) $(MAYA_CUSTOM_TEMPLATE_PATH)
 
 debug: $(LIBRARY)
 	cp -f $(LIBRARY) $(MAYA_PLUGINS_PATH)
+	cp -f $(AETEMPLATES) $(MAYA_CUSTOM_TEMPLATE_PATH)
 
 clean:
 	rm -f src/*.o
