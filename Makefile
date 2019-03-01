@@ -16,14 +16,14 @@
 #* along with chwTools.  If not, see <https://www.gnu.org/licenses/>.
 # *************************************************************************/
 
-#MayaPlugin Makefile
-
 ##################################
 ## MAYA VERSION AND LOCATION
 ##################################
-MAYA_MAJOR_VERSION=2018
-MAYA_MINOR_VERSION=0.0
-MAYA_LOCATION=/usr/autodesk/maya$(MAYA_MAJOR_VERSION)
+ifndef MAYA_VERSION
+$(error MAYA_VERSION is not set)
+endif
+
+MAYA_LOCATION=/usr/autodesk/maya$(MAYA_VERSION)
 
 MAYA_INCLUDE=-I$(MAYA_LOCATION)/include
 MAYA_LIB=-L$(MAYA_LOCATION)/lib -lOpenMaya -lOpenMayaAnim
@@ -31,11 +31,10 @@ MAYA_LIB=-L$(MAYA_LOCATION)/lib -lOpenMaya -lOpenMayaAnim
 ##################################
 ## PLUGIN OUTPUT
 ##################################
-MAYA_MODULE_INSTALL_PATH = ~/maya/$(MAYA_MAJOR_VERSION)/modules
+MAYA_MODULE_INSTALL_PATH = ~/maya/$(MAYA_VERSION)/modules
 MAYA_MODULE_PATH = chwTools
 MAYA_MODULE_FILE = $(MAYA_MODULE_PATH)/chwTools.mod
 LIBRARY=chwTools.so
-
 
 ##################################
 ## PLUGIN SOURCES
@@ -92,4 +91,4 @@ debug: $(LIBRARY)
 
 clean:
 	rm -f src/*.o
-	rm -f *.so
+	rm -f chwTools/plug-ins/*.so

@@ -1,0 +1,15 @@
+global proc AEchwSurfaceTweakTemplate( string $nodeName )
+{
+	editorTemplate -beginScrollLayout;
+	
+		editorTemplate -beginLayout "CHW Surface Tweak Attributes" -collapse 0;
+			editorTemplate -addControl "envelope";
+			editorTemplate -addControl "vertex";
+			editorTemplate -addControl "falloffMode";
+			editorTemplate -addControl "falloffRadius";
+			AEaddRampControl( $nodeName + ".falloffCurve" );
+		editorTemplate -endLayout;
+	
+	editorTemplate -addExtraControls;
+	editorTemplate -endScrollLayout;
+}
