@@ -95,7 +95,7 @@ MStatus chwVertexBind::initialize()
 	attributeAffects(chwVertexBind::aInitialize, 	chwVertexBind::outputGeom);
 	attributeAffects(chwVertexBind::aVertexMap,		chwVertexBind::outputGeom);
 
-	MGlobal::executeCommand( "makePaintable -attrType \"multiFloat\" -sm \"deformer\" \"vertSnap\" \"weights\";" );
+	MGlobal::executeCommand( "makePaintable -attrType \"multiFloat\" -sm \"deformer\" \"chwVertexBind\" \"weights\";" );
 
 	return MStatus::kSuccess;
 }
