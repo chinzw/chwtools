@@ -1,0 +1,4 @@
+# Ignore maya module build artifacts
+chwTools
+*.so
+*.o
