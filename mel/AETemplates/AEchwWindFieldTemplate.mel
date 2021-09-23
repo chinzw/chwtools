@@ -1,0 +1,61 @@
+global proc AEchwWindFieldTemplate( string $nodeName )
+{
+	editorTemplate -beginScrollLayout;
+	
+		editorTemplate -beginLayout "CHW Wind Field Attributes" -collapse 0;
+            editorTemplate -addControl "direction";
+            editorTemplate -addControl "maxDistance";
+			editorTemplate -addControl "useMaxDistance";
+			editorTemplate -addControl "attenuation";
+			editorTemplate -addControl "attenuationMode";
+			AEaddRampControl( $nodeName + ".falloffCurve" );
+
+            editorTemplate -beginLayout "Noise" -collapse 0;
+                editorTemplate -addControl "noiseWeight";
+                editorTemplate -addControl "noiseTimeMult";
+                editorTemplate -addControl "noiseOctaves";
+                editorTemplate -addControl "noisePersistence";
+                editorTemplate -addControl "noiseFrequency";
+                editorTemplate -addControl "noisePhase";
+            editorTemplate -endLayout;
+
+            
+            editorTemplate -beginLayout "Gust" -collapse 0;
+                editorTemplate -addControl "gustWeight";
+                editorTemplate -addControl "gustTimeMult";
+                editorTemplate -addControl "gustOctaves";
+                editorTemplate -addControl "gustPersistence";
+                editorTemplate -addControl "gustFrequency";
+                editorTemplate -addControl "gustPhase";
+                editorTemplate -addControl "gustBounds";
+            editorTemplate -endLayout;
+
+            
+            editorTemplate -beginLayout "Swirl" -collapse 0;
+                editorTemplate -addControl "swirlWeight";
+                editorTemplate -addControl "swirlTimeMult";
+                editorTemplate -addControl "swirlOctaves";
+                editorTemplate -addControl "swirlPersistence";
+                editorTemplate -addControl "swirlFrequency";
+                editorTemplate -addControl "swirlPhase";
+            editorTemplate -endLayout;
+
+            
+            editorTemplate -beginLayout "Occlusion" -collapse 0;
+                editorTemplate -addControl "oclusionMesh";
+                editorTemplate -addControl "occlusionMeshRadius";
+                editorTemplate -addControl "occlusionSelfRadius";
+            editorTemplate -endLayout;
+
+            
+            editorTemplate -beginLayout "Display" -collapse 0;
+                editorTemplate -addControl "displayField";
+                editorTemplate -addControl "displayNormalized";
+                editorTemplate -addControl "displayScale";
+            editorTemplate -endLayout;
+
+		editorTemplate -endLayout;
+	
+	editorTemplate -addExtraControls;
+	editorTemplate -endScrollLayout;
+}
