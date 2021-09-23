@@ -190,8 +190,24 @@ class chwWindField : public MPxFieldNode
 		fieldData* m_fieldData;
 		static MVector simplexNoise(const int octaves, const float persistence, const float time, const float timemult, const MVector freq, const MVector phase, const MVector sample);
 		static float simplexNoiseFloat(const int octaves, const float persistence, const float time, const float timemult, MVector freq, MVector phase, MVector sample, float loBound, float hiBound);
-		static IntersectionResult intersect(MVector &origin, MVector &dir, MPoint &center, float &radius2);
-		static IntersectionResult intersect(MVector &origin, MVector &dir, MVector &center, float &radius2);
+
+
+		template<typename T, typename C, typename D>
+		static IntersectionResult intersect(const T &origin, const C &dir, const D &center, const float radius2)
+		{
+			MVector dst = center - origin;
+			float B = dst * dir;
+			float C = B*B - (dst * dst) + radius2;
+			if(C < 0) return IntersectionResult();
+			float D = sqrtf(C), E = B+D;
+			if(E < 0) return IntersectionResult();
+			float F = B - D;
+			float dist = (F > 0) ? F : E;
+			dist -= 0.001f;
+			MVector p = origin + (dir * dist);
+			return IntersectionResult(dist, p);
+		}
+		
 		MVector getWorldPosition(MDataBlock &block);
 
 		struct ThreadedForce
