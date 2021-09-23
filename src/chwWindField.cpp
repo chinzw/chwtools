@@ -542,27 +542,6 @@ float chwWindField::simplexNoiseFloat(const int octaves, const float persistence
 	return result;
 }
 
-IntersectionResult chwWindField::intersect(MVector &origin, MVector &dir, MPoint &center, float &radius2)
-{
-	MVector vcenter = center;
-	return chwWindField::intersect(origin, dir, vcenter, radius2);
-}
-
-IntersectionResult chwWindField::intersect(MVector &origin, MVector &dir, MVector &center, float &radius2)
-{
-	MVector dst = center - origin;
-	float B = dst * dir;
-	float C = B*B - (dst * dst) + radius2;
-	if(C < 0) return IntersectionResult();
-	float D = sqrtf(C), E = B+D;
-	if(E < 0) return IntersectionResult();
-	float F = B - D;
-	float dist = (F > 0) ? F : E;
-	dist -= 0.001f;
-	MVector p = origin + (dir * dist);
-	return IntersectionResult(dist, p);
-}
-
 MVector chwWindField::getWorldPosition( MDataBlock &block )
 {
 	MVector pos(0,0,0);
