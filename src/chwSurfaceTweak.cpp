@@ -23,7 +23,7 @@
 
 #include "chwSurfaceTweak.h"
 
-const MTypeId chwSurfaceTweak::typeId( 0x89007 );
+const MTypeId chwSurfaceTweak::typeId( 0x00139200, 7 );
 const MString chwSurfaceTweak::typeName( "chwSurfaceTweak" );
 
 MObject    chwSurfaceTweak::aInVert;
@@ -127,7 +127,7 @@ MStatus chwSurfaceTweak::initialize()
 	attributeAffects( chwSurfaceTweak::aFalloffCurve, chwSurfaceTweak::outputGeom );
 	attributeAffects( chwSurfaceTweak::aFalloffRadius, chwSurfaceTweak::outputGeom );
 
-	MGlobal::executeCommand( "makePaintable -attrType \"multiFloat\" -sm \"deformer\" \"chwSurfaceTweak\" \"weights\";" );
+	MGlobal::executeCommand("makePaintable -attrType multiFloat -sm deformer chwSurfaceTweak weights");
 
 	return MStatus::kSuccess;
 }
@@ -222,7 +222,7 @@ MStatus chwSurfaceTweak::compute(const MPlug& plug, MDataBlock& data)
 				MTransformationMatrix outMatrix(m);
 				MTransformationMatrix::RotationOrder order;
 
-				outMatrix.getRotation(outRotate, order, MSpace::kWorld);
+				outMatrix.getRotation(outRotate, order);
 				outTranslate = outMatrix.getTranslation(MSpace::kWorld);
 
 				outRotateHnd.set3Double(outRotate[0], outRotate[1], outRotate[2]);
@@ -264,7 +264,7 @@ MStatus chwSurfaceTweak::compute(const MPlug& plug, MDataBlock& data)
 				m_data->m_localToWorldMatrixInverse = m_data->m_localToWorldMatrix.inverse();
 
 				MTransformationMatrix defMat(m_data->m_relativeMatrix);
-				m_data->m_relativeMatrixTranslate = defMat.translation(MSpace::kWorld);
+				m_data->m_relativeMatrixTranslate = defMat.getTranslation(MSpace::kWorld);
 
 				MFnMesh meshFn(mesh, &status);
 				CHECK_MSTATUS_AND_RETURN_IT(status);

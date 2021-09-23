@@ -32,7 +32,7 @@ endif
 MAYA_LOCATION=/usr/autodesk/maya${MAYA_VERSION}
 
 MAYA_INCLUDE=-I${MAYA_LOCATION}/include
-MAYA_LIB=-L${MAYA_LOCATION}/lib -lOpenMaya -lOpenMayaAnim
+MAYA_LIB=-L${MAYA_LOCATION}/lib -lOpenMaya -lOpenMayaAnim -lOpenMayaFX
 
 ##################################
 ## PLUGIN OUTPUT

@@ -23,7 +23,7 @@
 
 #include <chwMeshRelax.h>
 
-const MTypeId	chwMeshRelax::typeId( 0x89002 );
+const MTypeId	chwMeshRelax::typeId( 0x00139200, 2 );
 const MString	chwMeshRelax::typeName( "chwMeshRelax" );
 
 MObject 		chwMeshRelax::aIterations;

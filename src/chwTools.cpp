@@ -29,6 +29,7 @@
 #include <chwCurveSampler.h>
 #include <chwCollision.h>
 #include <chwSurfaceTweak.h>
+#include <chwWindField.h>
 
 MStatus initializePlugin( MObject obj )
 {
@@ -43,17 +44,21 @@ MStatus initializePlugin( MObject obj )
 	CHECK_MSTATUS ( plugin.registerNode( chwNormalOffset::typeName, chwNormalOffset::typeId,
 					chwNormalOffset::creator, chwNormalOffset::initialize, MPxNode::kDeformerNode ) );
 
-	CHECK_MSTATUS ( plugin.registerNode( chwCollision::typeName, chwCollision::typeId,
-					chwCollision::creator, chwCollision::initialize, MPxNode::kDeformerNode ) );
-
-	CHECK_MSTATUS ( plugin.registerNode( chwSurfaceTweak::typeName, chwSurfaceTweak::typeId,
-					chwSurfaceTweak::creator, chwSurfaceTweak::initialize, MPxNode::kDeformerNode ) );
-
 	CHECK_MSTATUS ( plugin.registerNode( chwMatrixSelector::typeName, chwMatrixSelector::typeId,
 					chwMatrixSelector::creator, chwMatrixSelector::initialize, MPxNode::kDependNode ) );
 
 	CHECK_MSTATUS ( plugin.registerNode( chwCurveSampler::typeName, chwCurveSampler::typeId,
 					chwCurveSampler::creator, chwCurveSampler::initialize, MPxNode::kDependNode ) );
+
+	CHECK_MSTATUS ( plugin.registerNode( chwCollision::typeName, chwCollision::typeId,
+					chwCollision::creator, chwCollision::initialize, MPxNode::kDeformerNode ) );
+	
+	CHECK_MSTATUS ( plugin.registerNode( chwSurfaceTweak::typeName, chwSurfaceTweak::typeId,
+					chwSurfaceTweak::creator, chwSurfaceTweak::initialize, MPxNode::kDeformerNode ) );
+
+	CHECK_MSTATUS ( plugin.registerNode( chwWindField::typeName, chwWindField::typeId,
+					chwWindField::creator, chwWindField::initialize, MPxNode::kFieldNode ) );
+
 	return MS::kSuccess;
 }
 
@@ -75,15 +80,20 @@ MStatus uninitializePlugin( MObject obj )
 
 	CHECK_MSTATUS ( plugin.deregisterNode( chwSurfaceTweak::typeId ) );
 
+	CHECK_MSTATUS ( plugin.deregisterNode( chwWindField::typeId ) );
+
 	return MS::kSuccess;
 }
 
 
-// PLUGIN IDS:
-// 0x89001 - chwVertexBind
-// 0x89002 - chwMeshRelax
-// 0x89003 - chwNormalOffset
-// 0x89004 - chwMatrixSelector
-// 0x89005 - chwCurveSampler
-// 0x89006 - chwCollision
-// 0x89007 - chwSurfaceTweak
+/*
+ PLUGIN IDS (PREFIX = 0x00139200):
+1 - chwVertexBind
+2 - chwMeshRelax
+3 - chwNormalOffset
+4 - chwMatrixSelector
+5 - chwCurveSampler
+6 - chwCollision
+7 - chwSurfaceTweak
+8 - chwWindField
+*/

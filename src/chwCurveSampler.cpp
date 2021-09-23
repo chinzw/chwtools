@@ -25,7 +25,7 @@
 
 #define _USE_MATH_DEFINES
 
-const MTypeId	chwCurveSampler::typeId( 0x89005 );
+const MTypeId	chwCurveSampler::typeId( 0x00139200, 5 );
 const MString	chwCurveSampler::typeName( "chwCurveSampler" );
 
 MObject 		chwCurveSampler::aInNumSamples;
@@ -60,10 +60,10 @@ MStatus chwCurveSampler::compute(const MPlug& plug, MDataBlock& data)
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		// SETUP ARRAY DATA BUILDER
-		MArrayDataBuilder outRotateBuilder(aOutRotate, inNumSamples, &status);
+		MArrayDataBuilder outRotateBuilder(&data, aOutRotate, inNumSamples, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
-		MArrayDataBuilder outTranslateBuilder(aOutTranslate, inNumSamples, &status);
+		MArrayDataBuilder outTranslateBuilder(&data, aOutTranslate, inNumSamples, &status);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
 
 		// GET INPUT CURVE
@@ -135,7 +135,7 @@ MStatus chwCurveSampler::compute(const MPlug& plug, MDataBlock& data)
 			MTransformationMatrix outMatrix(m);
 			MTransformationMatrix::RotationOrder order;
 
-			outMatrix.getRotation(outRotate, order, MSpace::kWorld);
+			outMatrix.getRotation(outRotate, order);
 			outTranslate = outMatrix.getTranslation(MSpace::kWorld);
 
 			outRotateHnd.set3Double(outRotate[0], outRotate[1], outRotate[2]);

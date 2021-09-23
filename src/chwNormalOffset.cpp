@@ -23,7 +23,7 @@
 
 #include <chwNormalOffset.h>
 
-const MTypeId chwNormalOffset::typeId( 0x89003 );
+const MTypeId chwNormalOffset::typeId( 0x00139200, 3 );
 const MString chwNormalOffset::typeName( "chwNormalOffset" );
 
 MObject     chwNormalOffset::aStrength;
