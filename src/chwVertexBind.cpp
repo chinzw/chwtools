@@ -23,7 +23,7 @@
 
 #include <chwVertexBind.h>
 
-MTypeId 		chwVertexBind::typeId ( 0x89001 );
+MTypeId 		chwVertexBind::typeId ( 0x00139200, 1 );
 const MString 	chwVertexBind::typeName( "chwVertexBind" );
 
 MObject 		chwVertexBind::aDriverMesh;
@@ -95,7 +95,7 @@ MStatus chwVertexBind::initialize()
 	attributeAffects(chwVertexBind::aInitialize, 	chwVertexBind::outputGeom);
 	attributeAffects(chwVertexBind::aVertexMap,		chwVertexBind::outputGeom);
 
-	MGlobal::executeCommand( "makePaintable -attrType \"multiFloat\" -sm \"deformer\" \"chwVertexBind\" \"weights\";" );
+	MGlobal::executeCommand("makePaintable -attrType multiFloat -sm deformer chwVertexBind weights");
 
 	return MStatus::kSuccess;
 }

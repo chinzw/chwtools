@@ -25,7 +25,7 @@
 
 #define _USE_MATH_DEFINES
 
-const MTypeId	chwMatrixSelector::typeId( 0x89004 );
+const MTypeId	chwMatrixSelector::typeId( 0x00139200, 4 );
 const MString	chwMatrixSelector::typeName( "chwMatrixSelector" );
 
 MObject 		chwMatrixSelector::aInMatrix;

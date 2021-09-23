@@ -23,7 +23,7 @@
 
 #include <chwCollision.h>
 
-const MTypeId	chwCollision::typeId( 0x89006 );
+const MTypeId	chwCollision::typeId( 0x00139200, 6 );
 const MString	chwCollision::typeName( "chwCollision" );
 
 MObject 		chwCollision::aCollisionStrength;
