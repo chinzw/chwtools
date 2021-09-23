@@ -20,7 +20,7 @@
 #* OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 #* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #***********************************************************************************/
-CHWTOOLS_VERSION = 1.0.0
+CHWTOOLS_VERSION = 1.1.0
 
 ##################################
 ## MAYA VERSION AND LOCATION
